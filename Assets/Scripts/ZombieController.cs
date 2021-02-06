@@ -6,23 +6,27 @@ public class ZombieController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private enum State
+    private enum ZombieState
     {
         findTarget,
         onGoing
     }
 
+    public float speed = 5f;
+
 
     private int health;
-    private State state;
+    private ZombieState state;
     private GameObject target;
 
     public int Health { get => health; set => health = value; }
+    public GameObject Target { get => target; set => target = value; }
+    private ZombieState State { get => state; set => state = value; }
 
     void Awake()
     {
 
-        state = State.findTarget;
+        State = ZombieState.findTarget;
 
     }
 
@@ -35,18 +39,68 @@ public class ZombieController : MonoBehaviour
     void Update()
     {
 
-        switch (state)
+        switch (State)
         {
-            case State.findTarget:
+            case ZombieState.findTarget:
+
+                Debug.Log("Find Target");
+
                 GameObject[] targetList = GameObject.FindGameObjectsWithTag("Target");
-                for (int i = 0;i < targetList.Length; i++)
+                if (targetList.Length > 0)
                 {
-                    GameObject targetObject = targetList[i];
-                    Debug.Log(targetObject.transform.position.ToString() + " " + this.transform.position.ToString());
+                    double minDistance = Vector3.Distance(targetList[0].transform.position, transform.position);
+                    Target = targetList[0];
+
+
+                    for (int i = 0; i < targetList.Length; i++)
+                    {
+                        GameObject targetObject = targetList[i];
+                        if(Vector3.Distance(targetObject.transform.position, transform.position) < minDistance)
+                        {
+                            minDistance = Vector3.Distance(targetObject.transform.position, transform.position);
+                            Target = targetList[i];
+                        }
+
+                    }
+
+                    State = ZombieState.onGoing;
+
+                    
 
                 }
+                
                 break;
-            case State.onGoing:
+            case ZombieState.onGoing:
+
+                //Debug.Log("On Going " + Target.transform.position.ToString() + transform.rotation.eulerAngles.ToString());
+
+                if(Target == null)
+                {
+                    State = ZombieState.findTarget;
+                }
+                else
+                {
+
+                    // Rotate Zombie to target
+                    if (Target.transform.position.x - transform.position.y > 0)
+                    {
+                        if (transform.rotation.eulerAngles.z % 360 >= 270f)
+                        {
+                            Debug.Log("Rotate");
+                            gameObject.transform.Rotate(0f, 0f, 180f);
+                        }
+                    }
+                    else
+                    {
+                        if (transform.rotation.eulerAngles.z % 360 < 270f)
+                        {
+                            Debug.Log("Rotate");
+                            gameObject.transform.Rotate(0f, 0f, 180f);
+                        }
+                    }
+
+                }
+
                 break;
         }
         
