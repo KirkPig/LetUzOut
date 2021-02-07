@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController: MonoBehaviour
+public class GameController: MonoBehaviour { 
+
     // Start is called before the first frame update
     public RadioScript radio;
     public bool isEnd;
