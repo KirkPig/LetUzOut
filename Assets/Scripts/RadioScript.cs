@@ -20,12 +20,11 @@ public class RadioScript : MonoBehaviour
         
     }
     
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Zombie")
-        {
-            health -= collision.gameObject.GetComponent<ZombieScript>().attack;
-            if (health < 0) health = 0;
-        }
-    }
+    int GetHealth() { return health; }
+    void SetHealth(int health) { if (health < 0) health = 0;  this.health = health; }
+    int GetProgress() { return progress; }
+    void SetProgress(int progress) { if (progress > 100) progress = 100; this.progress = progress; }
+    void DecreaseHealth(int damage) { SetHealth(health - damage); }
+    void IncreaseProgress(int progress) { SetProgress(this.progress + progress); }
+
 }
