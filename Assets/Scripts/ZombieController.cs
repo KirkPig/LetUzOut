@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ZombieController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class ZombieController : MonoBehaviour
     private ZombieState state;
     private GameObject target;
 
+    private NavMeshAgent agent;
+
     public int Health { get => health; set => health = value; }
     public GameObject Target { get => target; set => target = value; }
     private ZombieState State { get => state; set => state = value; }
@@ -32,7 +35,9 @@ public class ZombieController : MonoBehaviour
 
     void Start()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
@@ -100,6 +105,8 @@ public class ZombieController : MonoBehaviour
                     }
 
                 }
+
+                agent.SetDestination(target.transform.position);
 
                 break;
         }
