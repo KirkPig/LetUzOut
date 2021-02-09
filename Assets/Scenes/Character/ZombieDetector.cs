@@ -21,8 +21,8 @@ public class ZombieDetector : MonoBehaviour
         }
     }
 
-    public gameObject getNearestZombie(){
-        
+    public GameObject getNearestZombie(){
+        return gameObject;
     }
 }
      
