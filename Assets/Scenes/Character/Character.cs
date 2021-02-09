@@ -21,6 +21,17 @@ public class Character : MonoBehaviour, IClickable
 
 
     // Start is called before the first frame update
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("DDDD");
+        if (other.gameObject.tag == "Zombie")
+        {
+            Debug.Log("Fuck");
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -75,13 +86,4 @@ public class Character : MonoBehaviour, IClickable
         characterManager.setSelectedCharacter(this);
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("DDDD");
-        if (other.gameObject.tag == "Zombie")
-        {
-            Debug.Log("Fuck");
-            Destroy(this.gameObject);
-        }
-    }
 }
