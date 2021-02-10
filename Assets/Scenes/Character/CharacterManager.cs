@@ -26,7 +26,7 @@ public class CharacterManager : MonoBehaviour
         {
             Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit  = Physics2D.Raycast(mousePos, Vector2.zero);
-            if(hit)
+            if(hit && hit.transform.gameObject.tag=="Player")
             {
                 IClickable clickable = hit.collider.GetComponent<IClickable>();
                 clickable.click();

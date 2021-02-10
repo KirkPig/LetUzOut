@@ -50,7 +50,7 @@ public class ZombieController : MonoBehaviour
 
                 Debug.Log("Find Target");
 
-                GameObject[] targetList = GameObject.FindGameObjectsWithTag("Target");
+                GameObject[] targetList = GameObject.FindGameObjectsWithTag("Player");
                 if (targetList.Length > 0)
                 {
                     double minDistance = Vector3.Distance(targetList[0].transform.position, transform.position);
@@ -112,4 +112,14 @@ public class ZombieController : MonoBehaviour
         }
         
     }
+
+    /*private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("DDDD");
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Fuck");
+            Destroy(other.gameObject);
+        }
+    }*/
 }
