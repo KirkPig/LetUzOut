@@ -22,7 +22,7 @@ public class Character : MonoBehaviour, IClickable
 
     // Start is called before the first frame update
 
-    void OnCollisionEnter2D(Collision2D other)
+    /*void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("DDDD");
         if (other.gameObject.tag == "Zombie")
@@ -30,7 +30,7 @@ public class Character : MonoBehaviour, IClickable
             Debug.Log("Fuck");
             Destroy(this.gameObject);
         }
-    }
+    }*/
 
     void Start()
     {

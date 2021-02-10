@@ -67,8 +67,8 @@ public class ZombieController : MonoBehaviour
                         }
 
                     }
-
-                    State = ZombieState.onGoing;
+                    agent.SetDestination(Target.transform.position);
+                    //State = ZombieState.onGoing;
 
                     
 
@@ -106,20 +106,21 @@ public class ZombieController : MonoBehaviour
 
                 }
 
-                agent.SetDestination(target.transform.position);
+                //agent.SetDestination(target.transform.position);
 
                 break;
         }
         
     }
 
-    /*private void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("DDDD");
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Fuck");
+            double distance = Vector3.Distance(other.transform.position, transform.position);
+            Debug.Log("Fuck " + distance);
             Destroy(other.gameObject);
         }
-    }*/
+    }
 }
