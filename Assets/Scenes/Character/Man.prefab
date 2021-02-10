@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6621756359113019408}
   - component: {fileID: 6621756359113019409}
   - component: {fileID: -8314273065191672501}
-  - component: {fileID: 4105572129048891667}
   m_Layer: 0
   m_Name: Man
   m_TagString: Player
@@ -150,24 +149,3 @@ NavMeshAgent:
   m_BaseOffset: 0.64
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!50 &4105572129048891667
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621756359113019412}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
