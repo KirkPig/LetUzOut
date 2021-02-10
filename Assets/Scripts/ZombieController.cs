@@ -50,7 +50,7 @@ public class ZombieController : MonoBehaviour
 
                 Debug.Log("Find Target");
 
-                GameObject[] targetList = GameObject.FindGameObjectsWithTag("Target");
+                GameObject[] targetList = GameObject.FindGameObjectsWithTag("Player");
                 if (targetList.Length > 0)
                 {
                     double minDistance = Vector3.Distance(targetList[0].transform.position, transform.position);
@@ -67,8 +67,8 @@ public class ZombieController : MonoBehaviour
                         }
 
                     }
-
-                    State = ZombieState.onGoing;
+                    agent.SetDestination(Target.transform.position);
+                    //State = ZombieState.onGoing;
 
                     
 
@@ -106,10 +106,21 @@ public class ZombieController : MonoBehaviour
 
                 }
 
-                agent.SetDestination(target.transform.position);
+                //agent.SetDestination(target.transform.position);
 
                 break;
         }
         
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("DDDD");
+        if (other.gameObject.tag == "Player")
+        {
+            double distance = Vector3.Distance(other.transform.position, transform.position);
+            Debug.Log("Fuck " + distance);
+            Destroy(other.gameObject);
+        }
     }
 }

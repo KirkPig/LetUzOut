@@ -22,7 +22,7 @@ public class ZombieDetector : MonoBehaviour
     }
 
     public GameObject getNearestZombie(){
-        return gameObject ;
+        return gameObject;
     }
 }
      

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Character : MonoBehaviour, IClickable
 {
@@ -12,12 +13,30 @@ public class Character : MonoBehaviour, IClickable
     private float moveSpeed = 4;
     public CharacterManager characterManager;
 
+    public int sortingOrderHigh = 30;
+    public int sortingOrderLow = 0;
+
+    private NavMeshAgent agent;
+
 
 
     // Start is called before the first frame update
+
+    /*void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("DDDD");
+        if (other.gameObject.tag == "Zombie")
+        {
+            Debug.Log("Fuck");
+            Destroy(this.gameObject);
+        }
+    }*/
+
     void Start()
     {
-
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame  
@@ -25,15 +44,25 @@ public class Character : MonoBehaviour, IClickable
     {
         if (isMoving)
         {
+
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingOrderHigh;
             MoveUpdate();
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingOrderLow;
         }
     }
 
 
     public void setMoveTargetPosition()
     {
+        
         targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         targetPosition.z = transform.position.z;
+        
+
+        agent.SetDestination(targetPosition);
 
         isMoving = true;
     }
@@ -41,7 +70,11 @@ public class Character : MonoBehaviour, IClickable
     void MoveUpdate()
     {
         // transform.rotation = Quaternion.LookRotation(Vector3.forward, targetPosition);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        //targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //targetPosition.z = transform.position.z;
+
+        //agent.SetDestination(targetPosition);
         if (transform.position == targetPosition)
         {
             isMoving = false;
@@ -52,4 +85,5 @@ public class Character : MonoBehaviour, IClickable
     {
         characterManager.setSelectedCharacter(this);
     }
+
 }
